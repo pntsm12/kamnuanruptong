@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="BcwokyN2W4FMCCIj4YbvGcFCJojtQgojttCnNHCTtL4" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คำนวณพื้นที่รูปทรงออนไลน์</title>
+<meta name="description" content="คำนวณพื้นที่รูปทรงออนไลน์ฟรี สี่เหลี่ยม วงกลม สามเหลี่ยม สี่เหลี่ยมคางหมู พร้อมสูตรและตัวอย่าง ใช้งานง่าย ไม่ต้องโหลดแอป">
+<meta name="keywords" content="คำนวณพื้นที่, พื้นที่รูปทรง, พื้นที่สี่เหลี่ยม, พื้นที่วงกลม, พื้นที่สามเหลี่ยม">
+<meta property="og:title" content="คำนวณพื้นที่รูปทรงออนไลน์">
+<meta property="og:description" content="คำนวณพื้นที่รูปทรงออนไลน์ฟรี สี่เหลี่ยม วงกลม สามเหลี่ยม สี่เหลี่ยมคางหมู">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://pntsm12.github.io/kamnuanruptong/">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1063556443578237" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#FFFFFF;--bg2:#F7F7F5;--bg3:#F0EFEC;--border:#E4E4E0;--border2:#D4D4CF;--text:#1A1917;--text2:#706F6B;--text3:#B0AFA9;--ink:#1A1917;--accent:#2563EB;--header-bg:rgba(255,255,255,0.92);--logo-fill:#1A1917;}
+[data-theme="dark"]{--bg:#0F0F0F;--bg2:#1A1A1A;--bg3:#222222;--border:#2A2A2A;--border2:#333333;--text:#F0EFE8;--text2:#9A9890;--text3:#555450;--ink:#F0EFE8;--accent:#60A5FA;--header-bg:rgba(15,15,15,0.92);--logo-fill:#F0EFE8;}
+html{scroll-behavior:smooth;}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 20px;gap:10px;}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;}
+.logo-icon svg{width:32px;height:32px;display:block;}
+.logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.logo-text-th{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:var(--text);}
+.logo-text-en{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;}
+.dark-toggle{width:36px;height:36px;border:1.5px solid var(--border);border-radius:50%;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--text2);flex-shrink:0;}
+.dark-toggle:hover{border-color:var(--border2);color:var(--text);}
+.ad-strip{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;justify-content:center;padding:8px 16px;}
+.ad-728{width:100%;max-width:728px;height:90px;background:var(--bg);border:1.5px dashed var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:12px;}
+@media(max-width:600px){.ad-728{height:60px;}}
+.ad-mid{display:flex;justify-content:center;margin:28px 0;}
+.page-wrap{max-width:640px;margin:0 auto;padding:36px 20px 64px;}
+.page-heading{margin-bottom:28px;}
+.page-heading h1{font-family:'Noto Serif Thai',serif;font-size:clamp(28px,6vw,40px);font-weight:700;color:var(--text);line-height:1.15;letter-spacing:-0.5px;}
+.page-heading p{margin-top:8px;font-size:15px;color:var(--text2);}
+.field-label{font-size:13px;font-weight:600;color:var(--text2);letter-spacing:0.3px;margin-bottom:8px;display:block;}
+.hint{font-size:12px;color:var(--text3);margin-bottom:12px;}
+hr.section-hr{border:none;border-top:1px solid var(--border);margin:20px 0;}
+
+.shape-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+@media(max-width:400px){.shape-grid{grid-template-columns:1fr;}}
+.shape-btn{padding:16px 12px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg2);font-family:'Sarabun',sans-serif;cursor:pointer;text-align:center;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.shape-btn:hover:not(.active){border-color:var(--border2);background:var(--bg3);}
+.shape-btn.active{border-color:var(--ink);background:var(--ink);}
+.shape-icon{font-size:28px;line-height:1;color:var(--text);}
+.shape-name{font-size:14px;font-weight:600;color:var(--text);}
+.shape-formula{font-size:12px;color:var(--text2);font-family:monospace;}
+.shape-btn.active .shape-icon{color:var(--bg);}
+.shape-btn.active .shape-name{color:var(--bg);}
+.shape-btn.active .shape-formula{color:var(--bg);opacity:0.7;}
+
+.calc-panel{display:none;}
+.calc-panel.active{display:block;}
+
+.input-wrap{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;background:var(--bg);transition:border-color .15s,box-shadow .15s;margin-bottom:12px;}
+.input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.1);}
+.input-wrap input{flex:1;padding:11px 14px;border:none;outline:none;font-family:'Sarabun',sans-serif;font-size:20px;font-weight:600;color:var(--text);background:transparent;width:100%;}
+.input-wrap input::placeholder{color:var(--text3);font-weight:400;font-size:15px;}
+.input-suffix{padding:0 14px;font-size:13px;font-weight:600;color:var(--text3);border-left:1px solid var(--border);background:var(--bg2);min-height:46px;display:flex;align-items:center;}
+
+.btn-calc{width:100%;margin-top:8px;padding:13px;background:var(--ink);color:var(--bg);border:none;border-radius:9px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s,transform .1s;}
+.btn-calc:hover{opacity:0.85;}
+.btn-calc:active{transform:scale(0.99);}
+
+.result-box{display:none;margin-top:28px;animation:fadeUp .35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.result-main{padding:28px 0 24px;border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border);margin-bottom:16px;}
+.result-label{font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.result-num{font-family:'Noto Serif Thai',serif;font-size:clamp(52px,13vw,80px);font-weight:700;color:var(--text);line-height:1;letter-spacing:-2px;}
+.result-unit{font-family:'Noto Serif Thai',serif;font-size:22px;font-weight:400;color:var(--text2);margin-left:6px;vertical-align:bottom;display:inline-block;margin-bottom:6px;}
+.result-detail{font-size:15px;color:var(--text2);margin-top:10px;}
+.result-detail strong{color:var(--text);font-weight:600;}
+
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.stat-cell{background:var(--bg);padding:16px;text-align:center;}
+.stat-num{font-family:'Noto Serif Thai',serif;font-size:20px;font-weight:700;color:var(--text);}
+.stat-label{font-size:12px;color:var(--text3);margin-top:3px;}
+
+.share-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;}
+.btn-share-action{padding:11px 8px;border-radius:9px;border:1.5px solid var(--border);background:transparent;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.btn-share-action:hover{border-color:var(--border2);color:var(--text);}
+
+.history-section{margin-top:32px;border-top:1px solid var(--border);padding-top:24px;}
+.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.history-title{font-size:13px;font-weight:600;color:var(--text2);}
+.btn-clear-history{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:'Sarabun',sans-serif;}
+.btn-clear-history:hover{color:var(--text2);}
+.history-list{display:flex;flex-direction:column;gap:8px;}
+.history-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+.history-item-left{flex:1;}
+.history-item-area{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:var(--text);}
+.history-item-detail{font-size:12px;color:var(--text3);margin-top:2px;}
+.history-item-right{font-size:12px;color:var(--text3);}
+.history-empty{font-size:14px;color:var(--text3);text-align:center;padding:16px 0;}
+
+.info-section{border-top:1px solid var(--border);padding-top:32px;}
+.info-section h2{font-family:'Noto Serif Thai',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.info-section h2.mt{margin-top:24px;}
+.info-section p{font-size:14px;color:var(--text2);line-height:1.85;}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;font-size:13px;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;}
+footer a:hover{color:var(--text2);text-decoration:underline;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:transform .3s ease;z-index:999;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<header>
+  <a class="header-logo" href="/">
+    <div class="logo-icon">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="7" fill="var(--logo-fill)"/>
+        <text x="5" y="24" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="var(--bg)">K</text>
+        <text x="14" y="27" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="var(--bg)">+×=</text>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-text-th">คำนวณ</span>
+      <span class="logo-text-en">KAMNUAN</span>
+    </div>
+  </a>
+  <button class="dark-toggle" onclick="toggleDark()" title="เปลี่ยนธีม">
+    <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<div class="ad-strip"><div class="ad-728">📢 Google AdSense — 728×90 Leaderboard (Top)</div></div>
+
+<div class="page-wrap">
+  <div class="page-heading">
+    <h1>คำนวณพื้นที่รูปทรง</h1>
+    <p>เลือกรูปทรง กรอกตัวเลข รู้พื้นที่ทันที พร้อมสูตรคำนวณ</p>
+  </div>
+
+  <div class="shape-grid">
+    <button class="shape-btn active" onclick="switchShape('rect')">
+      <div class="shape-icon">▭</div>
+      <div class="shape-name">สี่เหลี่ยมผืนผ้า</div>
+      <div class="shape-formula">กว้าง × ยาว</div>
+    </button>
+    <button class="shape-btn" onclick="switchShape('square')">
+      <div class="shape-icon">■</div>
+      <div class="shape-name">สี่เหลี่ยมจัตุรัส</div>
+      <div class="shape-formula">ด้าน × ด้าน</div>
+    </button>
+    <button class="shape-btn" onclick="switchShape('circle')">
+      <div class="shape-icon">○</div>
+      <div class="shape-name">วงกลม</div>
+      <div class="shape-formula">π × รัศมี²</div>
+    </button>
+    <button class="shape-btn" onclick="switchShape('ellipse')">
+      <div class="shape-icon">⬭</div>
+      <div class="shape-name">วงรี</div>
+      <div class="shape-formula">π × a × b</div>
+    </button>
+    <button class="shape-btn" onclick="switchShape('triangle')">
+      <div class="shape-icon">△</div>
+      <div class="shape-name">สามเหลี่ยม</div>
+      <div class="shape-formula">ฐาน × สูง ÷ 2</div>
+    </button>
+    <button class="shape-btn" onclick="switchShape('trapezoid')">
+      <div class="shape-icon">⏢</div>
+      <div class="shape-name">สี่เหลี่ยมคางหมู</div>
+      <div class="shape-formula">(a+b) × สูง ÷ 2</div>
+    </button>
+  </div>
+
+  <!-- Rectangle -->
+  <div class="calc-panel active" id="panel-rect">
+    <span class="field-label">ความกว้าง</span>
+    <div class="input-wrap"><input type="number" id="r-w" placeholder="เช่น 5" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <span class="field-label">ความยาว</span>
+    <div class="input-wrap"><input type="number" id="r-l" placeholder="เช่น 8" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: สนามขนาด 5 × 8 เมตร มีพื้นที่ 40 ตร.ม.</p>
+    <button class="btn-calc" onclick="calcRect()">คำนวณ</button>
+  </div>
+
+  <!-- Square -->
+  <div class="calc-panel" id="panel-square">
+    <span class="field-label">ความยาวด้าน</span>
+    <div class="input-wrap"><input type="number" id="sq-d" placeholder="เช่น 5" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: สี่เหลี่ยมจัตุรัสด้าน 5 เมตร มีพื้นที่ 25 ตร.ม.</p>
+    <button class="btn-calc" onclick="calcSquare()">คำนวณ</button>
+  </div>
+
+  <!-- Circle -->
+  <div class="calc-panel" id="panel-circle">
+    <span class="field-label">รัศมี (ครึ่งหนึ่งของเส้นผ่านศูนย์กลาง)</span>
+    <div class="input-wrap"><input type="number" id="c-r" placeholder="เช่น 3" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: วงกลมเส้นผ่านศูนย์กลาง 6 เมตร ใส่รัศมี = 3</p>
+    <button class="btn-calc" onclick="calcCircle()">คำนวณ</button>
+  </div>
+
+  <!-- Ellipse -->
+  <div class="calc-panel" id="panel-ellipse">
+    <span class="field-label">แกนยาว (a) — ครึ่งหนึ่งของด้านยาว</span>
+    <div class="input-wrap"><input type="number" id="el-a" placeholder="เช่น 5" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <span class="field-label">แกนสั้น (b) — ครึ่งหนึ่งของด้านสั้น</span>
+    <div class="input-wrap"><input type="number" id="el-b" placeholder="เช่น 3" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: วงรีแกนยาว 5 แกนสั้น 3 เมตร มีพื้นที่ประมาณ 47.12 ตร.ม.</p>
+    <button class="btn-calc" onclick="calcEllipse()">คำนวณ</button>
+  </div>
+
+  <!-- Triangle -->
+  <div class="calc-panel" id="panel-triangle">
+    <span class="field-label">ความยาวฐาน</span>
+    <div class="input-wrap"><input type="number" id="t-b" placeholder="เช่น 6" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <span class="field-label">ความสูง</span>
+    <div class="input-wrap"><input type="number" id="t-h" placeholder="เช่น 4" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: สามเหลี่ยมฐาน 6 เมตร สูง 4 เมตร พื้นที่ = 12 ตร.ม.</p>
+    <button class="btn-calc" onclick="calcTriangle()">คำนวณ</button>
+  </div>
+
+  <!-- Trapezoid -->
+  <div class="calc-panel" id="panel-trapezoid">
+    <span class="field-label">ด้านบน (a)</span>
+    <div class="input-wrap"><input type="number" id="tr-a" placeholder="เช่น 4" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <span class="field-label">ด้านล่าง (b)</span>
+    <div class="input-wrap"><input type="number" id="tr-b" placeholder="เช่น 8" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <span class="field-label">ความสูง</span>
+    <div class="input-wrap"><input type="number" id="tr-h" placeholder="เช่น 5" min="0" inputmode="decimal"><span class="input-suffix">ม.</span></div>
+    <p class="hint">ตัวอย่าง: คางหมูด้านบน 4 ด้านล่าง 8 สูง 5 พื้นที่ = 30 ตร.ม.</p>
+    <button class="btn-calc" onclick="calcTrapezoid()">คำนวณ</button>
+  </div>
+
+  <!-- Result -->
+  <div class="result-box" id="resultBox">
+    <div class="result-main">
+      <div class="result-label">พื้นที่</div>
+      <div>
+        <span class="result-num" id="areaNum">–</span>
+        <span class="result-unit">ตร.ม.</span>
+      </div>
+      <div class="result-detail" id="areaDetail"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-num" id="areaCm">–</div><div class="stat-label">ตร.ซม.</div></div>
+      <div class="stat-cell"><div class="stat-num" id="areaFt">–</div><div class="stat-label">ตร.ฟุต</div></div>
+    </div>
+    <div class="share-row">
+      <button class="btn-share-action" onclick="shareLine()">Line</button>
+      <button class="btn-share-action" onclick="shareFacebook()">Facebook</button>
+      <button class="btn-share-action" onclick="copyResult()">คัดลอก</button>
+    </div>
+  </div>
+
+  <div class="history-section">
+    <div class="history-header">
+      <span class="history-title">ประวัติการคำนวณ</span>
+      <button class="btn-clear-history" onclick="clearHistory()">ล้างประวัติ</button>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">ยังไม่มีประวัติการคำนวณ</div>
+    </div>
+  </div>
+
+  <div class="ad-mid"><div class="ad-728">📢 Google AdSense — 728×90 Leaderboard (In-content)</div></div>
+
+  <div class="info-section">
+    <h2>สูตรคำนวณพื้นที่รูปทรงต่างๆ</h2>
+    <p>สี่เหลี่ยมผืนผ้า = กว้าง × ยาว · สี่เหลี่ยมจัตุรัส = ด้าน × ด้าน · วงกลม = π × รัศมี² (π ≈ 3.14159) · วงรี = π × แกนยาว × แกนสั้น · สามเหลี่ยม = ฐาน × สูง ÷ 2 · สี่เหลี่ยมคางหมู = (ด้านบน + ด้านล่าง) × สูง ÷ 2</p>
+  </div>
+
+  <div class="ad-mid" style="margin-bottom:0;"><div class="ad-728">📢 Google AdSense — 728×90 Leaderboard (Bottom)</div></div>
+</div>
+
+<footer>
+  <p>© 2568 คำนวณพื้นที่รูปทรงออนไลน์ · <a href="#">นโยบายความเป็นส่วนตัว</a> · <a href="#">ติดต่อ</a></p>
+</footer>
+<div class="toast" id="toast">คัดลอกแล้ว!</div>
+
+<script>
+function initTheme(){const s=localStorage.getItem('theme');const p=window.matchMedia('(prefers-color-scheme: dark)').matches;applyTheme(s||(p?'dark':'light'));}
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('iconSun').style.display=t==='dark'?'block':'none';document.getElementById('iconMoon').style.display=t==='light'?'block':'none';localStorage.setItem('theme',t);}
+function toggleDark(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+initTheme();
+
+const SHAPES=['rect','square','circle','ellipse','triangle','trapezoid'];
+let currentShape='rect';
+let lastResult=null;
+
+function switchShape(s){
+  currentShape=s;
+  document.querySelectorAll('.shape-btn').forEach((b,i)=>b.classList.toggle('active',SHAPES[i]===s));
+  SHAPES.forEach(x=>{document.getElementById('panel-'+x).classList.toggle('active',x===s);});
+  document.getElementById('resultBox').style.display='none';
+}
+
+function fmt(n){return parseFloat(n.toFixed(4)).toLocaleString('th-TH');}
+
+function showResult(area, detail){
+  document.getElementById('areaNum').textContent=fmt(area);
+  document.getElementById('areaDetail').innerHTML=detail;
+  document.getElementById('areaCm').textContent=fmt(area*10000);
+  document.getElementById('areaFt').textContent=fmt(area/0.0929);
+  lastResult={area,detail};
+  saveHistory({area:fmt(area),detail});
+  const box=document.getElementById('resultBox');box.style.display='block';
+  requestAnimationFrame(()=>box.scrollIntoView({behavior:'smooth',block:'nearest'}));
+}
+
+function calcRect(){
+  const w=parseFloat(document.getElementById('r-w').value);
+  const l=parseFloat(document.getElementById('r-l').value);
+  if(!w||!l){alert('กรุณากรอกข้อมูลให้ครบ');return;}
+  showResult(w*l,`กว้าง <strong>${w}</strong> × ยาว <strong>${l}</strong> เมตร`);
+}
+function calcSquare(){
+  const d=parseFloat(document.getElementById('sq-d').value);
+  if(!d){alert('กรุณากรอกความยาวด้าน');return;}
+  showResult(d*d,`ด้าน <strong>${d}</strong> × <strong>${d}</strong> เมตร`);
+}
+function calcCircle(){
+  const r=parseFloat(document.getElementById('c-r').value);
+  if(!r){alert('กรุณากรอกรัศมี');return;}
+  showResult(Math.PI*r*r,`รัศมี <strong>${r}</strong> เมตร (เส้นผ่าศูนย์กลาง ${r*2} เมตร)`);
+}
+function calcEllipse(){
+  const a=parseFloat(document.getElementById('el-a').value);
+  const b=parseFloat(document.getElementById('el-b').value);
+  if(!a||!b){alert('กรุณากรอกข้อมูลให้ครบ');return;}
+  showResult(Math.PI*a*b,`แกนยาว <strong>${a}</strong> × แกนสั้น <strong>${b}</strong> เมตร`);
+}
+function calcTriangle(){
+  const b=parseFloat(document.getElementById('t-b').value);
+  const h=parseFloat(document.getElementById('t-h').value);
+  if(!b||!h){alert('กรุณากรอกข้อมูลให้ครบ');return;}
+  showResult(b*h/2,`ฐาน <strong>${b}</strong> × สูง <strong>${h}</strong> ÷ 2`);
+}
+function calcTrapezoid(){
+  const a=parseFloat(document.getElementById('tr-a').value);
+  const b=parseFloat(document.getElementById('tr-b').value);
+  const h=parseFloat(document.getElementById('tr-h').value);
+  if(!a||!b||!h){alert('กรุณากรอกข้อมูลให้ครบ');return;}
+  showResult((a+b)*h/2,`(${a} + ${b}) × สูง <strong>${h}</strong> ÷ 2`);
+}
+
+function getShareText(){if(!lastResult)return'';return`คำนวณพื้นที่รูปทรง\n${lastResult.detail.replace(/<[^>]+>/g,'')}\nพื้นที่ = ${fmt(lastResult.area)} ตร.ม.\nhttps://pntsm12.github.io/kamnuanruptong/`;}
+function shareLine(){window.open('https://line.me/R/msg/text/?'+encodeURIComponent(getShareText()),'_blank');}
+function shareFacebook(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://pntsm12.github.io/kamnuanruptong/'),'_blank');}
+function copyResult(){navigator.clipboard.writeText(getShareText()).then(showToast).catch(()=>{const ta=document.createElement('textarea');ta.value=getShareText();document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast();});}
+
+function saveHistory(r){const item={area:r.area+' ตร.ม.',detail:r.detail.replace(/<[^>]+>/g,''),time:new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})};let h=JSON.parse(localStorage.getItem('shapeHistory')||'[]');h.unshift(item);h=h.slice(0,5);localStorage.setItem('shapeHistory',JSON.stringify(h));renderHistory();}
+function renderHistory(){const list=document.getElementById('historyList');const h=JSON.parse(localStorage.getItem('shapeHistory')||'[]');if(!h.length){list.innerHTML='<div class="history-empty">ยังไม่มีประวัติการคำนวณ</div>';return;}list.innerHTML=h.map(item=>`<div class="history-item"><div class="history-item-left"><div class="history-item-area">${item.area}</div><div class="history-item-detail">${item.detail}</div></div><div class="history-item-right">${item.time}</div></div>`).join('');}
+function clearHistory(){localStorage.removeItem('shapeHistory');renderHistory();}
+function showToast(){const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+renderHistory();
+</script>
+</body>
+</html>
